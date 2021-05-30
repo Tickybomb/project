@@ -1,23 +1,15 @@
 "use strict";
 
 /* Задание на урок:
-1) Создать переменную numberOfFilms и в неё поместить ответ от пользователя на вопрос:
-'Сколько фильмов вы уже посмотрели?'
-2) Создать объект personalMovieDB и в него поместить такие свойства:
-    - count - сюда передается ответ на первый вопрос
-    - movies - в это свойство поместить пустой объект
-    - actors - тоже поместить пустой объект
-    - genres - сюда поместить пустой массив
-    - privat - в это свойство поместить boolean(логическое) значение false
-3) Задайте пользователю по два раза вопросы:
-    - 'Один из последних просмотренных фильмов?'
-    - 'На сколько оцените его?'
-Ответы стоит поместить в отдельные переменные
-Записать ответы в объект movies в формате: 
-    movies: {
-        'logan': '8.1'
-    }
-Проверить, чтобы все работало без ошибок в консоли */
+1) Автоматизировать вопросы пользователю про фильмы при помощи цикла
+2) Сделать так, чтобы пользователь не мог оставить ответ в виде пустой строки,
+отменить ответ или ввести название фильма длинее, чем 50 символов. Если это происходит - 
+возвращаем пользователя к вопросам опять. (К любой строке можно обратиться как 
+str.length - и получить её длину)
+3) При помощи условий проверить  personalMovieDB.count, и если он меньше 10 - вывести сообщение
+"Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
+"Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
+4) Потренироваться и переписать цикл еще двумя способами*/
 
 const numberOfFilms = +prompt("How much movies have you already seen","");
 
@@ -30,12 +22,26 @@ const personalMovieDB = {
 
 };
 
-let oneOfLastSeenMovies1 = prompt('One of the last movies you have aready seen?','');
-let movieRating1 = +prompt(`How much stars from 0 to 10 ${oneOfLastSeenMovies1} has been?`,'');
-let oneOfLastSeenMovies2 = prompt('One of the last movies you have aready seen?','');
-let movieRating2 = +prompt(`How much stars from 0 to 10 ${oneOfLastSeenMovies2} has been?`,'');
+if (personalMovieDB.count < 10) {
+    alert("You have seen pretty small number of films");
+} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+    alert("You're a classical watcher");
+} else if (personalMovieDB > 30) {
+    alert("You're a movie fan");
+} else {
+    alert('Error');
+}
 
-personalMovieDB.movies[oneOfLastSeenMovies1] = movieRating1;
-personalMovieDB.movies[oneOfLastSeenMovies2] = movieRating2;
+for (let i = 0; i < 2; i++) {
+    let oneOfLastSeenMovies = prompt('One of the last movies you have aready seen?','');
+    let movieRating = +prompt(`How much stars from 0 to 10 ${oneOfLastSeenMovies} has been?`,'');
+
+    if (oneOfLastSeenMovies != null && movieRating != null && oneOfLastSeenMovies != '' && movieRating != '' && oneOfLastSeenMovies.length < 50 && movieRating.length < 50 ) {
+        personalMovieDB.movies[oneOfLastSeenMovies] = movieRating;
+    } else {
+        i--;
+    }
+     
+}
 
 console.log(personalMovieDB);
