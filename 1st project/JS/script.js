@@ -68,10 +68,33 @@ const personalMovieDB = {
         }
     },
     
+    toggleVisibleMyDB: function() {
+        personalMovieDB.privat = !personalMovieDB.privat; 
 
+    },
+
+    writeYourGenres: function() {
+        for (let i = 1; i <= 3; i++) {
+            let a = prompt(`Ваш любимый жанр под номером ${i}`);
+
+            if (a == null || a == '') {
+                i--;
+            } else {
+                personalMovieDB.genres[i - 1] = a;
+            }
+        }
+
+        personalMovieDB.genres.forEach(function(item, i) {
+                console.log(`Любимый жанр №${i + 1} - это ${item}`);
+         });
+        
+    }, 
 
 };
 
+console.log(personalMovieDB.privat);
+personalMovieDB.toggleVisibleMyDB();
+console.log(personalMovieDB.privat);
 
-personalMovieDB.start();
-alert(personalMovieDB.count);
+
+

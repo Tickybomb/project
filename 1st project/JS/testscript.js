@@ -15,20 +15,24 @@ const personalMovieDB = {
         
         writeYourGenres: function() {
                 for (let i = 1; i <= 3; i++) {
-                    personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`);
-                    
-                    if (personalMovieDB.genres[i - 1] == '' || personalMovieDB.genres[i - 1] == null) {
-                            i--;
-                        }
+                    let a = prompt(`Ваш любимый жанр под номером ${i}`);
+
+                    if (a == null || a == '') {
+                        i--;
+                    } else {
+                        personalMovieDB.genres[i - 1] = a;
+                    }
                 }
 
-                
-        
-        
-        }
-      
+                personalMovieDB.genres.forEach(function(item, i) {
+                        console.log(`Любимый жанр №${i + 1} - это ${item}`);
+                });
+
+        },
+            
        
 };
 
 
-// console.log(forEach(value,index, array){ })
+personalMovieDB.writeYourGenres();
+console.log(personalMovieDB.genres);
